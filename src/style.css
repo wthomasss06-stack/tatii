@@ -5,15 +5,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Outfit:wght@300;400;500;600&display=swap');
 
-/* ── VARIABLES ─────────────────────────────────────────────── */
+/* ── VARIABLES — MODE SOMBRE (défaut) — plus violet ────────── */
 :root {
-  --bg:          #0a0809;
-  --bg2:         #110d0f;
-  --bg3:         #180e12;
-  --surface:     #1e1217;
-  --surface2:    #261520;
-  --border:      rgba(212,175,90,0.12);
-  --border-strong: rgba(212,175,90,0.3);
+  --bg:          #080612;
+  --bg2:         #0e0a1c;
+  --bg3:         #130d24;
+  --surface:     #18102e;
+  --surface2:    #211440;
+
+  --border:        rgba(180,120,255,0.15);
+  --border-strong: rgba(180,120,255,0.38);
 
   --gold:        #d4af5a;
   --gold-light:  #f0d08a;
@@ -22,11 +23,20 @@
 
   --rose:        #c8728a;
   --rose-dim:    rgba(200,114,138,0.12);
-  --violet:      #9b6daf;
-  --violet-dim:  rgba(155,109,175,0.12);
-  --ivory:       #f5ede0;
-  --ivory-dim:   rgba(245,237,224,0.7);
-  --muted:       rgba(245,237,224,0.35);
+
+  --violet:      #c084fc;
+  --violet-mid:  #a855f7;
+  --violet-dim:  rgba(192,132,252,0.18);
+  --violet-glow: rgba(192,132,252,0.32);
+
+  --accent:        var(--violet);
+  --accent-dim:    var(--violet-dim);
+  --accent-glow:   var(--violet-glow);
+  --shadow-accent: 0 8px 40px rgba(192,132,252,0.28);
+
+  --ivory:       #f0e8ff;
+  --ivory-dim:   rgba(240,232,255,0.72);
+  --muted:       rgba(240,232,255,0.38);
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'Outfit', sans-serif;
@@ -34,9 +44,46 @@
 
   --radius:      16px;
   --radius-xl:   28px;
-  --shadow:      0 8px 32px rgba(0,0,0,0.6);
-  --shadow-gold: 0 8px 40px rgba(212,175,90,0.2);
+  --shadow:      0 8px 32px rgba(0,0,0,0.7);
+  --shadow-gold: 0 8px 40px rgba(192,132,252,0.25);
   --transition:  all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── VARIABLES — MODE CLAIR (blanc & violet) ───────────────── */
+[data-theme="light"] {
+  --bg:          #ffffff;
+  --bg2:         #faf7ff;
+  --bg3:         #f3eeff;
+  --surface:     #ffffff;
+  --surface2:    #f5f0ff;
+
+  --border:        rgba(124,58,237,0.14);
+  --border-strong: rgba(124,58,237,0.32);
+
+  --gold:        #7c3aed;
+  --gold-light:  #9333ea;
+  --gold-dim:    rgba(124,58,237,0.1);
+  --gold-glow:   rgba(124,58,237,0.2);
+
+  --rose:        #9333ea;
+  --rose-dim:    rgba(147,51,234,0.1);
+
+  --violet:      #7c3aed;
+  --violet-mid:  #6d28d9;
+  --violet-dim:  rgba(124,58,237,0.1);
+  --violet-glow: rgba(124,58,237,0.22);
+
+  --accent:        var(--violet);
+  --accent-dim:    var(--violet-dim);
+  --accent-glow:   var(--violet-glow);
+  --shadow-accent: 0 8px 40px rgba(124,58,237,0.18);
+
+  --ivory:       #1e0a3c;
+  --ivory-dim:   rgba(30,10,60,0.75);
+  --muted:       rgba(30,10,60,0.45);
+
+  --shadow:      0 8px 32px rgba(124,58,237,0.1);
+  --shadow-gold: 0 8px 40px rgba(124,58,237,0.15);
 }
 
 /* ── RESET ─────────────────────────────────────────────────── */
@@ -50,7 +97,32 @@ body {
   color: var(--ivory);
   overflow-x: hidden;
   line-height: 1.7;
+  transition: background 0.4s ease, color 0.4s ease;
 }
+
+/* ── LIGHT MODE — overrides spécifiques ────────────────────── */
+[data-theme="light"] #navbar.scrolled {
+  background: rgba(255,255,255,0.92);
+  border-color: var(--border);
+  box-shadow: 0 4px 32px rgba(124,58,237,0.1);
+}
+[data-theme="light"] .mobile-nav-drawer { background: #fff; }
+[data-theme="light"] .float-card { background: rgba(255,255,255,0.95); border-color: var(--border-strong); }
+[data-theme="light"] .about-quote { background: var(--surface2); }
+[data-theme="light"] .passion-card,
+[data-theme="light"] .recipe-card,
+[data-theme="light"] .tricot-item,
+[data-theme="light"] .produit-card,
+[data-theme="light"] .foi-val,
+[data-theme="light"] .contact-item,
+[data-theme="light"] .contact-form,
+[data-theme="light"] .boutique-banner,
+[data-theme="light"] .cv-widget { background: #fff; border-color: var(--border); }
+[data-theme="light"] .modal-box,
+[data-theme="light"] .modal-body { background: #fff; }
+[data-theme="light"] .modal-details { background: var(--surface2); }
+[data-theme="light"] footer { background: var(--bg2); border-color: var(--border); }
+[data-theme="light"] .img-zoom-overlay { background: rgba(30,10,60,0.95); }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -60,7 +132,7 @@ ul { list-style: none; }
 /* ── SCROLLBAR ─────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
 /* ── CANVAS PÉTALES ────────────────────────────────────────── */
 #petals-canvas {
@@ -93,7 +165,7 @@ ul { list-style: none; }
   border: 1px solid var(--border-strong);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold);
+  color: var(--accent);
   opacity: 0;
   transform: translateY(20px);
   transition: var(--transition);
@@ -158,7 +230,7 @@ section {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -167,7 +239,7 @@ section {
 .section-eyebrow::before {
   content: '';
   width: 32px; height: 1px;
-  background: var(--gold);
+  background: var(--accent);
   flex-shrink: 0;
 }
 
@@ -181,12 +253,12 @@ section {
 }
 .section-title em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--accent);
 }
 
 .section-divider {
   width: 80px; height: 2px;
-  background: linear-gradient(90deg, var(--gold), transparent);
+  background: linear-gradient(90deg, var(--accent), transparent);
   margin-bottom: 48px;
 }
 
@@ -213,13 +285,13 @@ section {
   font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--gold);
+  color: var(--accent);
   letter-spacing: 0.04em;
-  text-shadow: 0 0 24px rgba(212,175,90,0.4);
+  text-shadow: 0 0 24px var(--accent-glow);
   transition: var(--transition);
 }
 .nav-logo:hover {
-  text-shadow: 0 0 40px rgba(212,175,90,0.7);
+  text-shadow: 0 0 40px var(--accent-glow);
   transform: scale(1.04);
 }
 
@@ -244,14 +316,14 @@ section {
   position: absolute;
   bottom: 4px; left: 50%;
   width: 0; height: 1px;
-  background: var(--gold);
+  background: var(--accent);
   transform: translateX(-50%);
   transition: width 0.3s ease;
 }
-.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover { color: var(--accent); }
 .nav-links a:hover::after,
 .nav-links a.active::after { width: 60%; }
-.nav-links a.active { color: var(--gold); }
+.nav-links a.active { color: var(--accent); }
 
 /* Hamburger */
 .hamburger {
@@ -264,7 +336,7 @@ section {
 .hamburger span {
   display: block;
   width: 24px; height: 2px;
-  background: var(--gold);
+  background: var(--accent);
   border-radius: 2px;
   transition: var(--transition);
   transform-origin: center;
@@ -1635,8 +1707,8 @@ footer {
   font-family: var(--font-display);
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--gold);
-  text-shadow: 0 0 24px rgba(212,175,90,0.3);
+  color: var(--accent);
+  text-shadow: 0 0 24px var(--accent-glow);
 }
 .footer-copy { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em; }
 .footer-icons { display: flex; gap: 12px; }
@@ -1696,20 +1768,8 @@ footer {
   .hero-pillars { gap: 8px; }
   .pillar-chip { font-size: 0.72rem; padding: 7px 13px 7px 10px; }
 
-  /* Float cards — repositionnées sur mobile */
-  .float-card {
-    display: flex;
-    padding: 8px 12px;
-    gap: 8px;
-    border-radius: 12px;
-  }
-  .fc-cooking  { bottom: 10%; left: -2%; }
-  .fc-knitting { top: 8%;  right: -2%; }
-  .fc-faith    { top: 48%; right: -2%; }
-  .fc-icon { width: 34px; height: 34px; border-radius: 9px; }
-  .fc-icon svg { width: 18px; height: 18px; }
-  .fc-label { font-size: 0.52rem; }
-  .fc-value { font-size: 0.72rem; }
+  /* Float cards — cachées sur mobile pour ne pas bloquer la vue */
+  .float-card { display: none; }
 
   /* About */
   .about-ornament {

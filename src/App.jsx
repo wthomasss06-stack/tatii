@@ -346,7 +346,7 @@ const Modal = ({ produit, onClose }) => {
 // ============================================================
 // NAV
 // ============================================================
-const Navbar = () => {
+const Navbar = ({ toggleTheme, theme }) => {
   const [open, setOpen] = useState(false);
 
   const scrollTo = (id) => {
@@ -381,6 +381,20 @@ const Navbar = () => {
         </ul>
         <button className={`hamburger ${open ? 'open' : ''}`} id="hamburger" aria-label="Menu" onClick={() => setOpen(!open)}>
           <span/><span/><span/>
+        </button>
+        <button onClick={toggleTheme} aria-label="Changer de thème" style={{
+          border: '1.5px solid var(--border-strong)',
+          borderRadius: '100px', padding: '6px 14px', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', gap: '6px',
+          color: 'var(--accent)', fontSize: '0.65rem', fontWeight: '600',
+          letterSpacing: '0.1em', textTransform: 'uppercase',
+          fontFamily: 'var(--font-body)', transition: 'var(--transition)',
+          background: 'var(--accent-dim)',
+        }}>
+          {theme === 'dark'
+            ? <><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>Clair</>
+            : <><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Sombre</>
+          }
         </button>
       </nav>
 
@@ -851,6 +865,14 @@ const Footer = () => (
 // ============================================================
 export default function App() {
   const [modal, setModal] = useState(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem('tatiana-theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : '');
+    localStorage.setItem('tatiana-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
   useReveal();
   usePetals();
@@ -881,7 +903,7 @@ export default function App() {
         <div className="wa-text"><span>Commander &amp; Infos</span><span>0151 151 432</span></div>
       </a>
 
-      <Navbar />
+      <Navbar toggleTheme={toggleTheme} theme={theme} />
       <Hero />
       <About />
       <Passions />
